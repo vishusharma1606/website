@@ -4,7 +4,7 @@ function About() {
   return (
     <section id="about" className="section about split">
       <div>
-        <p className="eyebrow">Who we are</p>
+        <p className="eyebrow">About</p>
         <h2>Professional advisory with a calm, client-first approach</h2>
         <p>
           LegalTackleAdvisor is a trusted tax and legal support firm offering practical solutions for registrations, filings, audits, and compliance matters for individuals and businesses.

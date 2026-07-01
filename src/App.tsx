@@ -114,6 +114,8 @@ function App() {
         </div>
       </section>
 
+      <About />
+
       <section className="section reveal-on-scroll">
         <div className="section-heading">
           <p className="eyebrow">Why clients trust us</p>
@@ -135,12 +137,13 @@ function App() {
         </div>
       </section>
 
-      {/* Stats section removed per request */}
-
       <section id="services" className="section services">
         <div className="section-heading">
           <p className="eyebrow">Our services</p>
-          <h2>Solutions crafted for businesses and legal professionals</h2>
+          <h2>Practical support for registrations, compliance, filings, and business growth</h2>
+          <p className="section-intro">
+            From day-to-day compliance to business setup and documentation, we provide clear, dependable support tailored to your goals.
+          </p>
         </div>
         <div className="cards-grid">
           <article className="card reveal-on-scroll">
@@ -177,8 +180,6 @@ function App() {
           </article>
         </div>
       </section>
-
-      <About />
 
       <Contact />
 
