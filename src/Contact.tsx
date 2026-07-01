@@ -20,7 +20,8 @@ function Contact() {
     setSubmitStatus('sending');
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/xyz@gmail.com', {
+      // TODO: replace with your real email before deploying
+      const response = await fetch('https://formsubmit.co/ajax/your-email@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ function Contact() {
     <section className="section contact reveal-on-scroll" id="contact">
       <div className="section-heading contact-heading">
         <p className="eyebrow">Contact us</p>
-        <h2>Let’s make your next filing, registration, or compliance step simple.</h2>
+        <h2>Let's make your next filing, registration, or compliance step simple.</h2>
         <p className="contact-subheading">If you have any questions or suggestions, please feel free to reach out to us.</p>
       </div>
 
@@ -60,7 +61,7 @@ function Contact() {
         <div className="contact-form-intro">
           <p className="eyebrow">Enquiry form</p>
           <h3>Tell us about your requirement</h3>
-          <p>Share your details and we’ll get back to you with the right guidance.</p>
+          <p>Share your details and we'll get back to you with the right guidance.</p>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-row">
@@ -85,7 +86,7 @@ function Contact() {
             <p className="form-status success">Thank you! Your enquiry has been sent to the owner.</p>
           )}
           {submitStatus === 'error' && (
-            <p className="form-status error">Sorry, your enquiry could not be sent. Please email xyz@gmail.com directly.</p>
+            <p className="form-status error">Sorry, your enquiry could not be sent. Please email your-email@gmail.com directly.</p>
           )}
           <button type="submit" className="btn btn-primary" disabled={submitStatus === 'sending'}>
             {submitStatus === 'sending' ? 'Sending...' : 'Submit'}
@@ -101,7 +102,7 @@ function Contact() {
           </div>
           <div className="contact-item">
             <h3>Email</h3>
-            <p>xyz@gmail.com</p>
+            <p>your-email@gmail.com</p>
           </div>
           <div className="contact-item">
             <h3>Office</h3>
@@ -110,7 +111,7 @@ function Contact() {
           <div className="contact-item social-item">
             <h3>Follow us</h3>
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/legaltackleadvisor"
               target="_blank"
               rel="noreferrer"
               className="social-link"

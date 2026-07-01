@@ -1,46 +1,34 @@
-import React from 'react';
-
 function Testimonials() {
-  const testimonials = [
+  const reviews = [
     {
-      name: 'Rajesh Kumar',
-      title: 'Business Owner, Tech Startup',
-      quote: 'LegalTackleAdvisor made our company registration seamless. Professional, quick, and clear guidance throughout. Highly recommended!',
-      initials: 'RK'
+      name: 'Rohit Verma',
+      role: 'Startup founder',
+      text: 'Fast and clear support for our company registration. Everything was handled professionally.',
     },
     {
-      name: 'Priya Sharma',
-      title: 'Freelance Consultant',
-      quote: 'Filing my ITR was stress-free with their support. They explained everything clearly and got it done on time. Excellent service.',
-      initials: 'PS'
+      name: 'Priya Malhotra',
+      role: 'Freelance consultant',
+      text: 'Reliable ITR and GST filing every year. They explain everything in simple terms.',
     },
     {
-      name: 'Amit Patel',
-      title: 'Startup Founder',
-      quote: 'From GST registration to ROC filings—everything was handled professionally. They saved me so much time and worry.',
-      initials: 'AP'
-    }
+      name: 'Sanjay Gupta',
+      role: 'Small business owner',
+      text: 'Helped us with ROC compliance without any delays. Highly recommended.',
+    },
   ];
 
   return (
     <section className="section testimonials reveal-on-scroll">
       <div className="section-heading">
-        <p className="eyebrow">What clients say</p>
-        <h2>Trusted by entrepreneurs and professionals across industries</h2>
+        <p className="eyebrow">Client stories</p>
+        <h2>What our clients say</h2>
       </div>
-
-      <div className="testimonials-grid">
-        {testimonials.map((testimonial, index) => (
-          <article key={index} className="testimonial-card reveal-on-scroll">
-            <div className="testimonial-header">
-              <div className="testimonial-avatar">{testimonial.initials}</div>
-              <div className="testimonial-info">
-                <h4>{testimonial.name}</h4>
-                <p className="testimonial-title">{testimonial.title}</p>
-              </div>
-            </div>
-            <p className="testimonial-quote">"{testimonial.quote}"</p>
-            <div className="testimonial-stars">★★★★★</div>
+      <div className="cards-grid">
+        {reviews.map((r) => (
+          <article className="card reveal-on-scroll" key={r.name}>
+            <p>"{r.text}"</p>
+            <h3>{r.name}</h3>
+            <p style={{ color: '#64748b', margin: 0 }}>{r.role}</p>
           </article>
         ))}
       </div>

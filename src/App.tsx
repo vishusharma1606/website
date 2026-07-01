@@ -1,9 +1,40 @@
-import { useEffect, type MouseEvent } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import Contact from './Contact';
 import About from './About';
 import Testimonials from './Testimonials';
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+
+  const modalContent: Record<string, { title: string; body: string; points: string[] }> = {
+    consultation: {
+      title: 'Quick consultation',
+      body: 'Share your requirement and one of our advisors will get back to you within 24 hours with clear next steps.',
+      points: ['Free initial call', 'Response within 24 hours', 'No obligation'],
+    },
+    incorporation: {
+      title: 'Company incorporation',
+      body: 'We help you register your firm quickly and correctly, handling documentation, approvals, and filings end to end.',
+      points: [
+        'Private limited, LLP, or proprietorship',
+        'Document preparation and filing',
+        'DSC and DIN support',
+        'Typical turnaround: 7 to 10 working days',
+      ],
+    },
+    gst: {
+      title: 'GST and ITR support',
+      body: 'Fast, accurate GST registration, return filing, and income tax return support for individuals and businesses.',
+      points: ['GST registration and returns', 'ITR filing for individuals and firms', 'Reconciliation support'],
+    },
+    compliance: {
+      title: 'Compliance reminder',
+      body: 'Stay ahead of ROC, DSC, and other statutory deadlines with ongoing compliance tracking and reminders.',
+      points: ['ROC annual filings', 'DSC renewal tracking', 'Deadline reminders'],
+    },
+  };
+
   const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, targetId: string) => {
     event.preventDefault();
     const target = document.getElementById(targetId);
@@ -13,7 +44,9 @@ function App() {
     }
 
     window.history.pushState(null, '', `#${targetId}`);
+    setMenuOpen(false);
   };
+
   useEffect(() => {
     const elements = document.querySelectorAll('.reveal-on-scroll');
     if (elements.length === 0) return;
@@ -34,16 +67,55 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const sections = ['top', 'services', 'about', 'contact'];
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => link.classList.remove('active-link'));
+            const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+            activeLink?.classList.add('active-link');
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="app-shell" id="top">
       <header className="topbar reveal-on-scroll">
         <div className="topbar-inner">
-          <div className="brand">LegalTackleAdvisor</div>
-          <nav className="nav-links">
+          <div className="brand">
+            <span className="brand-mark">LTA</span>
+            LegalTackleAdvisor
+          </div>
+          <button
+            className="menu-toggle"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <nav className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
             <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
             <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
             <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
             <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
+            <a href="#contact" className="nav-cta" onClick={(event) => handleSectionClick(event, 'contact')}>Book a consultation</a>
           </nav>
         </div>
       </header>
@@ -69,21 +141,18 @@ function App() {
           </div>
         </div>
         <div className="hero-panel reveal-on-scroll">
-          <div className="hero-image-placeholder">
-            <svg width="100%" height="100%" viewBox="0 0 400 300" style={{minHeight: '320px'}} xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{stopColor: '#1d4ed8', stopOpacity: 0.05}} />
-                  <stop offset="100%" style={{stopColor: '#173c8f', stopOpacity: 0.08}} />
-                </linearGradient>
-              </defs>
-              <rect width="400" height="300" fill="url(#bgGrad)" />
-              <circle cx="200" cy="100" r="40" fill="#d4a574" opacity="0.2" />
-              <circle cx="80" cy="150" r="30" fill="#1d4ed8" opacity="0.15" />
-              <circle cx="320" cy="200" r="35" fill="#d4a574" opacity="0.15" />
-              <text x="200" y="140" textAnchor="middle" fill="#1d4ed8" opacity="0.4" style={{fontSize: '24px', fontWeight: 'bold'}}>Professional Team</text>
-              <text x="200" y="170" textAnchor="middle" fill="#64748b" opacity="0.3" style={{fontSize: '14px'}}>Expert Legal & Tax Advisors</text>
-            </svg>
+          <img
+            src="/hero-image.jpg"
+            alt="Legal and tax advisory team at work"
+            className="hero-image"
+          />
+          <div className="hero-panel-card">
+            <p>GST & Tax</p>
+            <h3>Seamless filing, return management and tax support</h3>
+          </div>
+          <div className="hero-panel-card">
+            <p>Registrations & ROC</p>
+            <h3>Company incorporation, firm registration, DSC and ROC filings</h3>
           </div>
         </div>
       </section>
@@ -102,23 +171,23 @@ function App() {
         <div className="quick-grid">
           <article className="quick-card reveal-on-scroll">
             <h3>Quick consultation</h3>
-            <p>Send your details and we’ll contact you with a clear next step.</p>
-            <a href="#contact" className="quick-link" onClick={(event) => handleSectionClick(event, 'contact')}>Contact now</a>
+            <p>Send your details and we'll contact you with a clear next step.</p>
+            <button className="quick-link" onClick={() => setActiveModal('consultation')}>Contact now</button>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>Company incorporation</h3>
             <p>Register your firm quickly with expert support for documents and filings.</p>
-            <a href="#services" className="quick-link" onClick={(event) => handleSectionClick(event, 'services')}>Learn more</a>
+            <button className="quick-link" onClick={() => setActiveModal('incorporation')}>Learn more</button>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>GST & ITR support</h3>
             <p>Get fast help for GST registration, returns, and income tax filing.</p>
-            <a href="#services" className="quick-link" onClick={(event) => handleSectionClick(event, 'services')}>Get started</a>
+            <button className="quick-link" onClick={() => setActiveModal('gst')}>Get started</button>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>Compliance reminder</h3>
             <p>Stay ahead of deadlines with ongoing ROC, DSC, and legal compliance support.</p>
-            <a href="#contact" className="quick-link" onClick={(event) => handleSectionClick(event, 'contact')}>Request help</a>
+            <button className="quick-link" onClick={() => setActiveModal('compliance')}>Request help</button>
           </article>
         </div>
       </section>
@@ -198,9 +267,34 @@ function App() {
         <p>© 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
       </footer>
 
-      <a href="tel:+9183750528" className="floating-contact" aria-label="Call LegalTackleAdvisor">
+      <a href="tel:+918375052108" className="floating-contact" aria-label="Call LegalTackleAdvisor">
         Call now
       </a>
+
+      {activeModal && (
+        <div className="modal-overlay" onClick={() => setActiveModal(null)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" aria-label="Close" onClick={() => setActiveModal(null)}>×</button>
+            <h3>{modalContent[activeModal].title}</h3>
+            <p>{modalContent[activeModal].body}</p>
+            <ul className="modal-points">
+              {modalContent[activeModal].points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              className="btn btn-primary"
+              onClick={(event) => {
+                setActiveModal(null);
+                handleSectionClick(event, 'contact');
+              }}
+            >
+              Enquire now
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
