@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, type MouseEvent } from 'react';
 import Contact from './Contact';
 import About from './About';
 
 function App() {
-  const [route, setRoute] = useState<string>(window.location.hash.replace('#', '') || '/');
-  useEffect(() => {
-    const onHash = () => setRoute(window.location.hash.replace('#', '') || '/');
-    window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
-  }, []);
+  const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    event.preventDefault();
+    const target = document.getElementById(targetId);
 
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    window.history.pushState(null, '', `#${targetId}`);
+  };
   useEffect(() => {
     const elements = document.querySelectorAll('.reveal-on-scroll');
     if (elements.length === 0) return;
@@ -28,29 +31,7 @@ function App() {
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [route]);
-
-  if (route === '/about') {
-    return (
-      <div className="app-shell" id="top">
-        <header className="topbar">
-          <div className="topbar-inner">
-            <div className="brand">LegalTackleAdvisor</div>
-            <nav className="nav-links">
-              <a href="#/">Home</a>
-              <a href="#services">Services</a>
-              <a href="#/about">About</a>
-              <a href="#contact">Contact</a>
-            </nav>
-          </div>
-        </header>
-        <main>
-          <About />
-        </main>
-        <Contact />
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="app-shell" id="top">
@@ -58,10 +39,10 @@ function App() {
         <div className="topbar-inner">
           <div className="brand">LegalTackleAdvisor</div>
           <nav className="nav-links">
-            <a href="#/">Home</a>
-            <a href="#services">Services</a>
-            <a href="#/about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
+            <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
+            <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
+            <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
           </nav>
         </div>
       </header>
@@ -74,8 +55,8 @@ function App() {
             LegalTackleAdvisor delivers dependable assistance for individuals, startups, and growing businesses with accurate filings, timely compliance, and practical legal guidance.
           </p>
           <div className="hero-actions reveal-on-scroll">
-            <a href="#contact" className="btn btn-primary">Book a consultation</a>
-            <a href="#services" className="btn btn-secondary">Explore services</a>
+            <a href="#contact" className="btn btn-primary" onClick={(event) => handleSectionClick(event, 'contact')}>Book a consultation</a>
+            <a href="#services" className="btn btn-secondary" onClick={(event) => handleSectionClick(event, 'services')}>Explore services</a>
           </div>
           <div className="hero-badges reveal-on-scroll">
             <span>GST</span>
@@ -103,7 +84,7 @@ function App() {
           <p>Need help with filings, registrations, or compliance?</p>
           <div className="help-strip-actions">
             <span>Fast response • Clear pricing • Legal expertise</span>
-            <a href="#contact" className="btn btn-secondary">Talk to an advisor</a>
+            <a href="#contact" className="btn btn-secondary" onClick={(event) => handleSectionClick(event, 'contact')}>Talk to an advisor</a>
           </div>
         </div>
       </section>
@@ -113,22 +94,22 @@ function App() {
           <article className="quick-card reveal-on-scroll">
             <h3>Quick consultation</h3>
             <p>Send your details and we’ll contact you with a clear next step.</p>
-            <a href="#contact" className="quick-link">Contact now</a>
+            <a href="#contact" className="quick-link" onClick={(event) => handleSectionClick(event, 'contact')}>Contact now</a>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>Company incorporation</h3>
             <p>Register your firm quickly with expert support for documents and filings.</p>
-            <a href="#services" className="quick-link">Learn more</a>
+            <a href="#services" className="quick-link" onClick={(event) => handleSectionClick(event, 'services')}>Learn more</a>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>GST & ITR support</h3>
             <p>Get fast help for GST registration, returns, and income tax filing.</p>
-            <a href="#services" className="quick-link">Get started</a>
+            <a href="#services" className="quick-link" onClick={(event) => handleSectionClick(event, 'services')}>Get started</a>
           </article>
           <article className="quick-card reveal-on-scroll">
             <h3>Compliance reminder</h3>
             <p>Stay ahead of deadlines with ongoing ROC, DSC, and legal compliance support.</p>
-            <a href="#contact" className="quick-link">Request help</a>
+            <a href="#contact" className="quick-link" onClick={(event) => handleSectionClick(event, 'contact')}>Request help</a>
           </article>
         </div>
       </section>
@@ -197,7 +178,7 @@ function App() {
         </div>
       </section>
 
-      {/* About moved to separate About.tsx route (#/about) */}
+      <About />
 
       <Contact />
 
