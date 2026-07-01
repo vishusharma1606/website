@@ -1,6 +1,7 @@
 import { useEffect, type MouseEvent } from 'react';
 import Contact from './Contact';
 import About from './About';
+import Testimonials from './Testimonials';
 
 function App() {
   const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -68,13 +69,21 @@ function App() {
           </div>
         </div>
         <div className="hero-panel reveal-on-scroll">
-          <div className="hero-panel-card">
-            <p>GST & Tax</p>
-            <h3>Seamless filing, return management and tax support</h3>
-          </div>
-          <div className="hero-panel-card">
-            <p>Registrations & ROC</p>
-            <h3>Company incorporation, firm registration, DSC and ROC filings</h3>
+          <div className="hero-image-placeholder">
+            <svg width="100%" height="100%" viewBox="0 0 400 300" style={{minHeight: '320px'}} xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor: '#1d4ed8', stopOpacity: 0.05}} />
+                  <stop offset="100%" style={{stopColor: '#173c8f', stopOpacity: 0.08}} />
+                </linearGradient>
+              </defs>
+              <rect width="400" height="300" fill="url(#bgGrad)" />
+              <circle cx="200" cy="100" r="40" fill="#d4a574" opacity="0.2" />
+              <circle cx="80" cy="150" r="30" fill="#1d4ed8" opacity="0.15" />
+              <circle cx="320" cy="200" r="35" fill="#d4a574" opacity="0.15" />
+              <text x="200" y="140" textAnchor="middle" fill="#1d4ed8" opacity="0.4" style={{fontSize: '24px', fontWeight: 'bold'}}>Professional Team</text>
+              <text x="200" y="170" textAnchor="middle" fill="#64748b" opacity="0.3" style={{fontSize: '14px'}}>Expert Legal & Tax Advisors</text>
+            </svg>
           </div>
         </div>
       </section>
@@ -180,6 +189,8 @@ function App() {
           </article>
         </div>
       </section>
+
+      <Testimonials />
 
       <Contact />
 
