@@ -164,6 +164,7 @@ function App() {
             src={`${import.meta.env.BASE_URL}hero-image.jpg`}
             alt="Legal and tax advisory team at work"
             className="hero-image"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
           />
           <div className="hero-panel-card">
             <p>GST & Tax</p>
