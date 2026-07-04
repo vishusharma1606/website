@@ -94,48 +94,50 @@ function App() {
 
   return (
     <div className="app-shell" id="top">
-      <div className="info-strip">
-        <div className="info-strip-inner">
-          <div className="info-left">
-            <a href="mailto:legaltackleadvisor@gmail.com">legaltackleadvisor@gmail.com</a>
-            <span className="sep">•</span>
-            <a href="tel:+918375052108">+91 8375052108</a>
-          </div>
-          <div className="info-right">
-            <span className="follow">Follow Us:</span>
-            <a href="#" aria-label="Facebook" className="social-circle">f</a>
-            <a href="#" aria-label="Instagram" className="social-circle">ig</a>
-            <a href="#" aria-label="LinkedIn" className="social-circle">in</a>
+      <div className="site-header reveal-on-scroll">
+        <div className="info-strip">
+          <div className="info-strip-inner">
+            <div className="info-left">
+              <a href="mailto:legaltackleadvisor@gmail.com">legaltackleadvisor@gmail.com</a>
+              <span className="sep">&bull;</span>
+              <a href="tel:+918375052108">+91 8375052108</a>
+            </div>
+            <div className="info-right">
+              <span className="follow">Follow Us:</span>
+              <a href="#" aria-label="Facebook" className="social-circle">f</a>
+              <a href="https://www.instagram.com/legaltackleadvisor" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle">ig</a>
+              <a href="#" aria-label="LinkedIn" className="social-circle">in</a>
+            </div>
           </div>
         </div>
+        <header className="topbar">
+          <div className="topbar-inner">
+            <div className="brand">
+              <span className="brand-mark">
+                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="LegalTackleAdvisor logo" className="brand-logo" />
+              </span>
+              <span className="brand-name">LegalTackleAdvisor</span>
+            </div>
+            <button
+              className="menu-toggle"
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+            <nav className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
+              <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
+              <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
+              <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
+              <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
+              <a href="#contact" className="nav-cta" onClick={(event) => handleSectionClick(event, 'contact')}>Book a consultation</a>
+            </nav>
+          </div>
+        </header>
       </div>
-      <header className="topbar reveal-on-scroll">
-        <div className="topbar-inner">
-          <div className="brand">
-            <span className="brand-mark">
-              <img src="/logo.jpg" alt="LegalTackleAdvisor logo" className="brand-logo" />
-            </span>
-            <span className="brand-name">LegalTackleAdvisor</span>
-          </div>
-          <button
-            className="menu-toggle"
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-          <nav className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
-            <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
-            <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
-            <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
-            <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
-            <a href="#contact" className="nav-cta" onClick={(event) => handleSectionClick(event, 'contact')}>Book a consultation</a>
-          </nav>
-        </div>
-      </header>
 
       <section className="hero reveal-on-scroll">
         <div className="hero-copy reveal-on-scroll">
@@ -159,7 +161,7 @@ function App() {
         </div>
         <div className="hero-panel reveal-on-scroll">
           <img
-            src="/hero-image.jpg"
+            src={`${import.meta.env.BASE_URL}hero-image.jpg`}
             alt="Legal and tax advisory team at work"
             className="hero-image"
           />
@@ -281,7 +283,26 @@ function App() {
       <Contact />
 
       <footer className="footer">
-        <p>&copy; 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-logo-badge">
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="LegalTackleAdvisor logo" className="footer-logo" />
+            </span>
+            <div>
+              <p className="footer-title">LegalTackleAdvisor</p>
+              <p className="footer-text">Trusted tax and legal advisory for individuals, startups, and growing businesses across Ghaziabad and NCR.</p>
+            </div>
+          </div>
+          <nav className="footer-links">
+            <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
+            <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
+            <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
+            <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <p>&copy; 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
+        </div>
       </footer>
 
       <a href="tel:+918375052108" className="floating-contact" aria-label="Call LegalTackleAdvisor">

@@ -20,8 +20,7 @@ function Contact() {
     setSubmitStatus('sending');
 
     try {
-      // TODO: replace with your real email before deploying
-      const response = await fetch('https://formsubmit.co/ajax/your-email@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/legaltackleadvisor@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +85,7 @@ function Contact() {
             <p className="form-status success">Thank you! Your enquiry has been sent to the owner.</p>
           )}
           {submitStatus === 'error' && (
-            <p className="form-status error">Sorry, your enquiry could not be sent. Please email your-email@gmail.com directly.</p>
+            <p className="form-status error">Sorry, your enquiry could not be sent. Please email legaltackleadvisor@gmail.com directly.</p>
           )}
           <button type="submit" className="btn btn-primary" disabled={submitStatus === 'sending'}>
             {submitStatus === 'sending' ? 'Sending...' : 'Submit'}
@@ -102,7 +101,7 @@ function Contact() {
           </div>
           <div className="contact-item">
             <h3>Email</h3>
-            <p>your-email@gmail.com</p>
+            <p>legaltackleadvisor@gmail.com</p>
           </div>
           <div className="contact-item">
             <h3>Office</h3>
