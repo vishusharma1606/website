@@ -110,13 +110,17 @@ function Contact() {
           <div className="contact-item social-item">
             <h3>Follow us</h3>
             <a
-              href="https://www.instagram.com/legaltackleadvisor"
+              href="https://www.instagram.com/legaltackle?igsh=Z2s4cWRxOTdyeTht"
               target="_blank"
               rel="noreferrer"
               className="social-link"
               aria-label="Visit Instagram"
             >
-              <span aria-hidden="true">IG</span>
+              <svg viewBox="0 0 24 24" className="social-link-icon" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+              </svg>
               <span>Instagram</span>
             </a>
           </div>

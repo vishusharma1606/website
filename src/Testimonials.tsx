@@ -2,17 +2,17 @@ function Testimonials() {
   const reviews = [
     {
       name: 'Rohit Verma',
-      role: 'Startup founder',
+      
       text: 'Fast and clear support for our company registration. Everything was handled professionally.',
     },
     {
       name: 'Priya Malhotra',
-      role: 'Freelance consultant',
+      
       text: 'Reliable ITR and GST filing every year. They explain everything in simple terms.',
     },
     {
       name: 'Sanjay Gupta',
-      role: 'Small business owner',
+      
       text: 'Helped us with ROC compliance without any delays. Highly recommended.',
     },
   ];
@@ -28,7 +28,7 @@ function Testimonials() {
           <article className="card reveal-on-scroll" key={r.name}>
             <p>"{r.text}"</p>
             <h3>{r.name}</h3>
-            <p style={{ color: '#64748b', margin: 0 }}>{r.role}</p>
+            <p style={{ color: '#64748b', margin: 0 }}>{}</p>
           </article>
         ))}
       </div>

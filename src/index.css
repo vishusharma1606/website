@@ -121,6 +121,13 @@ section[id] {
   background: rgba(255,255,255,0.22);
 }
 
+.social-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  color: currentColor;
+}
+
 .topbar-inner {
   width: 100%;
   max-width: 1400px;
@@ -805,6 +812,13 @@ section[id] {
   width: fit-content;
   color: #d4b445;
   font-weight: 600;
+}
+
+.social-link-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  color: currentColor;
 }
 
 .social-link:hover {

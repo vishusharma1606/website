@@ -105,7 +105,13 @@ function App() {
             <div className="info-right">
               <span className="follow">Follow Us:</span>
               <a href="#" aria-label="Facebook" className="social-circle">f</a>
-              <a href="https://www.instagram.com/legaltackleadvisor" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle">ig</a>
+              <a href="https://www.instagram.com/legaltackle?igsh=Z2s4cWRxOTdyeTht" target="_blank" rel="noreferrer" aria-label="Instagram" className="social-circle">
+                <svg viewBox="0 0 24 24" className="social-icon" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                  <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+                  <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+                </svg>
+              </a>
               <a href="#" aria-label="LinkedIn" className="social-circle">in</a>
             </div>
           </div>
@@ -285,21 +291,15 @@ function App() {
 
       <footer className="footer">
         <div className="footer-inner">
-          <div className="footer-brand">
-            <span className="footer-logo-badge">
-              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="LegalTackleAdvisor logo" className="footer-logo" />
-            </span>
-            <div>
-              <p className="footer-title">LegalTackleAdvisor</p>
-              <p className="footer-text">Trusted tax and legal advisory for individuals, startups, and growing businesses across Ghaziabad and NCR.</p>
+          <div className="footer-inner">
+            <div className="footer-brand">
+              <span className="brand-mark">LTA</span>
+              <div>
+                <p className="footer-title">LegalTackleAdvisor</p>
+                <p className="footer-text">Trusted tax and legal advisory for individuals, startups, and growing businesses across Ghaziabad and NCR.</p>
+              </div>
             </div>
           </div>
-          <nav className="footer-links">
-            <a href="#top" onClick={(event) => handleSectionClick(event, 'top')}>Home</a>
-            <a href="#services" onClick={(event) => handleSectionClick(event, 'services')}>Services</a>
-            <a href="#about" onClick={(event) => handleSectionClick(event, 'about')}>About</a>
-            <a href="#contact" onClick={(event) => handleSectionClick(event, 'contact')}>Contact</a>
-          </nav>
         </div>
         <div className="footer-bottom">
           <p>&copy; 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
