@@ -117,7 +117,7 @@ function Contact() {
               className="social-link"
               aria-label="Visit Instagram"
             >
-              <span aria-hidden="true">📸</span>
+              <span aria-hidden="true">IG</span>
               <span>Instagram</span>
             </a>
           </div>

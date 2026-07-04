@@ -94,11 +94,28 @@ function App() {
 
   return (
     <div className="app-shell" id="top">
+      <div className="info-strip">
+        <div className="info-strip-inner">
+          <div className="info-left">
+            <a href="mailto:legaltackleadvisor@gmail.com">legaltackleadvisor@gmail.com</a>
+            <span className="sep">•</span>
+            <a href="tel:+918375052108">+91 8375052108</a>
+          </div>
+          <div className="info-right">
+            <span className="follow">Follow Us:</span>
+            <a href="#" aria-label="Facebook" className="social-circle">f</a>
+            <a href="#" aria-label="Instagram" className="social-circle">ig</a>
+            <a href="#" aria-label="LinkedIn" className="social-circle">in</a>
+          </div>
+        </div>
+      </div>
       <header className="topbar reveal-on-scroll">
         <div className="topbar-inner">
           <div className="brand">
-            <span className="brand-mark">LTA</span>
-            LegalTackleAdvisor
+            <span className="brand-mark">
+              <img src="/logo.jpg" alt="LegalTackleAdvisor logo" className="brand-logo" />
+            </span>
+            <span className="brand-name">LegalTackleAdvisor</span>
           </div>
           <button
             className="menu-toggle"
@@ -161,7 +178,7 @@ function App() {
         <div className="help-strip-inner">
           <p>Need help with filings, registrations, or compliance?</p>
           <div className="help-strip-actions">
-            <span>Fast response • Clear pricing • Legal expertise</span>
+            <span>Fast response &bull; Clear pricing &bull; Legal expertise</span>
             <a href="#contact" className="btn btn-secondary" onClick={(event) => handleSectionClick(event, 'contact')}>Talk to an advisor</a>
           </div>
         </div>
@@ -264,7 +281,7 @@ function App() {
       <Contact />
 
       <footer className="footer">
-        <p>© 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
+        <p>&copy; 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
       </footer>
 
       <a href="tel:+918375052108" className="floating-contact" aria-label="Call LegalTackleAdvisor">
@@ -274,7 +291,7 @@ function App() {
       {activeModal && (
         <div className="modal-overlay" onClick={() => setActiveModal(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" aria-label="Close" onClick={() => setActiveModal(null)}>×</button>
+            <button className="modal-close" aria-label="Close" onClick={() => setActiveModal(null)}>&times;</button>
             <h3>{modalContent[activeModal].title}</h3>
             <p>{modalContent[activeModal].body}</p>
             <ul className="modal-points">
