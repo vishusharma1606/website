@@ -116,7 +116,7 @@ function App() {
               <span className="brand-mark">
                 <img src={`${import.meta.env.BASE_URL}logo.png`} alt="LegalTackleAdvisor logo" className="brand-logo" />
               </span>
-              <span className="brand-name">LegalTackleAdvisor</span>
+              <span className="brand-name">Legal Tackle Advisor</span>
             </div>
             <button
               className="menu-toggle"
@@ -144,7 +144,7 @@ function App() {
           <p className="eyebrow">Trusted tax & legal advisory</p>
           <h1>Reliable tax and legal support for every stage of your business</h1>
           <p>
-            LegalTackleAdvisor delivers dependable assistance for individuals, startups, and growing businesses with accurate filings, timely compliance, and practical legal guidance.
+            Legal Tackle Advisor delivers dependable assistance for individuals, startups, and growing businesses with accurate filings, timely compliance, and practical legal guidance.
           </p>
           <div className="hero-actions reveal-on-scroll">
             <a href="#contact" className="btn btn-primary" onClick={(event) => handleSectionClick(event, 'contact')}>Book a consultation</a>
