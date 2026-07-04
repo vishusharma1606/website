@@ -290,17 +290,6 @@ function App() {
       <Contact />
 
       <footer className="footer">
-        <div className="footer-inner">
-          <div className="footer-inner">
-            <div className="footer-brand">
-              <span className="brand-mark">LTA</span>
-              <div>
-                <p className="footer-title">LegalTackleAdvisor</p>
-                <p className="footer-text">Trusted tax and legal advisory for individuals, startups, and growing businesses across Ghaziabad and NCR.</p>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="footer-bottom">
           <p>&copy; 2026 LegalTackleAdvisor. We are a private advisory firm helping clients with tax, audit, DSC, ROC and compliance work.</p>
         </div>
