@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function Contact() {
-  const mapAddress = encodeURIComponent('14, Meerut Rd, Harbans Nagar, Ghukna, Noida, Ghaziabad, Uttar Pradesh 201001, India');
+  const mapAddress = encodeURIComponent('Opp Metro Pillar No. 564, Meerut Road, Ghaziabad, Uttar Pradesh, India');
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -105,7 +105,7 @@ function Contact() {
           </div>
           <div className="contact-item">
             <h3>Office</h3>
-            <p>14, Meerut Rd, Harbans Nagar, Ghukna, Noida, Ghaziabad, Uttar Pradesh 201001, India</p>
+            <p>Opp Metro Pillar No. 564, Meerut Road, Ghaziabad, Uttar Pradesh, India</p>
           </div>
           <div className="contact-item social-item">
             <h3>Follow us</h3>
