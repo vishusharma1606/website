@@ -8,9 +8,8 @@ import { PhoneIcon } from './components/Icons';
 import { MarqueeStrip } from './components/MarqueeStrip';
 import { MovingWorkflow } from './components/MovingWorkflow';
 import { Navbar } from './components/Navbar';
-import { ServiceDetailPage } from './components/ServiceDetailPage';
 import { ServicesSection } from './components/ServicesSection';
-import { SERVICES } from './data/advisoryData';
+import { SERVICES_LIST, getServicePageBySlug } from './pages/services';
 
 function getServiceSlugFromHash(hash: string): string | null {
   const match = hash.match(/^#\/services\/([^/?#]+)/);
@@ -26,9 +25,9 @@ function App() {
   );
   const [pendingScrollId, setPendingScrollId] = useState<string | null>(null);
 
-  const activeService = serviceSlug
-    ? SERVICES.find((s) => s.slug === serviceSlug) ?? null
-    : null;
+  const activeServiceEntry = getServicePageBySlug(serviceSlug);
+  const activeService = activeServiceEntry?.data ?? null;
+  const ActiveServicePage = activeServiceEntry?.Component ?? null;
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -148,9 +147,9 @@ function App() {
       <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
 
       <main>
-        {activeService ? (
-          <ServiceDetailPage
-            service={activeService}
+        {ActiveServicePage ? (
+          <ActiveServicePage
+            allServices={SERVICES_LIST}
             onNavigateHome={(sectionId = 'top') => scrollToSection(sectionId)}
             onNavigateService={handleOpenServicePage}
           />

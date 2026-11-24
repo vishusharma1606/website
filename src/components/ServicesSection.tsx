@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-  SERVICES,
-  type ServiceCategory,
-  type ServiceItem,
-} from '../data/advisoryData';
+import type { ServiceCategory, ServiceItem } from '../data/advisoryData';
+import { SERVICES_LIST } from '../pages/services';
 import { ArrowRightIcon, CheckCircleIcon, ClockIcon } from './Icons';
 
 interface ServicesSectionProps {
@@ -27,8 +24,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
   const filtered =
     activeCategory === 'all'
-      ? SERVICES
-      : SERVICES.filter((s) => s.category === activeCategory);
+      ? SERVICES_LIST
+      : SERVICES_LIST.filter((s) => s.category === activeCategory);
 
   return (
     <section id="services" className="section services-section">

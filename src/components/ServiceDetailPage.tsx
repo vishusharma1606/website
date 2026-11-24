@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SERVICES, type ServiceItem } from '../data/advisoryData';
+import type { ServiceItem } from '../data/advisoryData';
 import {
   ArrowRightIcon,
   CheckCircleIcon,
@@ -11,12 +11,14 @@ import {
 
 interface ServiceDetailPageProps {
   service: ServiceItem;
+  allServices?: ServiceItem[];
   onNavigateHome: (sectionId?: string) => void;
   onNavigateService: (slug: string) => void;
 }
 
 export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   service,
+  allServices = [],
   onNavigateHome,
   onNavigateService,
 }) => {
@@ -50,7 +52,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
     return () => window.clearInterval(timer);
   }, [service.id, service.processSteps.length]);
 
-  const otherServices = SERVICES.filter((s) => s.id !== service.id);
+  const otherServices = allServices.filter((s) => s.id !== service.id);
   const progressPct = (activeStep / Math.max(1, service.processSteps.length - 1)) * 100;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

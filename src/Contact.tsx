@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SERVICES } from './data/advisoryData';
+import { SERVICES_LIST } from './pages/services';
 import { ArrowRightIcon, InstagramIcon, MailIcon, MapPinIcon, PhoneIcon } from './components/Icons';
 
 interface ContactProps {
@@ -139,7 +139,7 @@ function Contact({ selectedService, prefillNote }: ContactProps) {
                   <span>Service Needed</span>
                   <select name="service" value={formData.service} onChange={handleChange}>
                     <option value="General Consultation">General Consultation</option>
-                    {SERVICES.map((s) => (
+                    {SERVICES_LIST.map((s) => (
                       <option key={s.id} value={s.title}>
                         {s.title}
                       </option>
