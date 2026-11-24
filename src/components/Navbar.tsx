@@ -1,8 +1,10 @@
 import React, { useEffect, useState, type MouseEvent } from 'react';
-import { InstagramIcon, MailIcon, PhoneIcon } from './Icons';
+import { InstagramIcon, MailIcon, MoonIcon, PhoneIcon, SunIcon } from './Icons';
 
 interface NavbarProps {
   activeSection: string;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
   onNavigate: (event: MouseEvent<HTMLAnchorElement>, targetId: string) => void;
 }
 
@@ -15,7 +17,12 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact' },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  activeSection,
+  theme,
+  onToggleTheme,
+  onNavigate,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -90,17 +97,39 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             </span>
           </a>
 
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="nav-right-controls">
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={onToggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to Day mode' : 'Switch to Night mode'}
+              title={theme === 'dark' ? 'Switch to Day mode' : 'Switch to Night mode'}
+            >
+              {theme === 'dark' ? (
+                <>
+                  <SunIcon className="icon-xs" />
+                  <span>Day</span>
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="icon-xs" />
+                  <span>Night</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
 
           <nav className={`nav-links ${menuOpen ? 'nav-open' : ''}`} aria-label="Primary navigation">
             {NAV_ITEMS.map((item) => (

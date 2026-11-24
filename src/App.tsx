@@ -17,6 +17,10 @@ function getServiceSlugFromHash(hash: string): string | null {
 }
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('lta-theme');
+    return saved === 'dark' || saved === 'light' ? saved : 'light';
+  });
   const [activeSection, setActiveSection] = useState('top');
   const [selectedService, setSelectedService] = useState('');
   const [prefillNote, setPrefillNote] = useState('');
@@ -24,6 +28,15 @@ function App() {
     getServiceSlugFromHash(window.location.hash)
   );
   const [pendingScrollId, setPendingScrollId] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('lta-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const activeServiceEntry = getServicePageBySlug(serviceSlug);
   const activeService = activeServiceEntry?.data ?? null;
@@ -144,7 +157,12 @@ function App() {
 
   return (
     <div className="app-root" id="top">
-      <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
+      <Navbar
+        activeSection={activeSection}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        onNavigate={handleNavigate}
+      />
 
       <main>
         {ActiveServicePage ? (
