@@ -54,11 +54,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           </div>
         </div>
 
-        <div className="services-grid">
+        <div className="services-grid reveal-on-scroll">
           {filtered.map((service) => (
             <article
               key={service.id}
-              className="service-card reveal-on-scroll"
+              className="service-card"
               onClick={() => setSelectedService(service)}
             >
               <div className="service-card-top">

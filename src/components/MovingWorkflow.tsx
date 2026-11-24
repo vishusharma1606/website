@@ -90,48 +90,50 @@ export const MovingWorkflow: React.FC<MovingWorkflowProps> = ({ onNavigate }) =>
         </div>
 
         {/* Active Stage Detail Card */}
-        <div className="workflow-stage-panel reveal-on-scroll" key={current.step}>
-          <div className="stage-panel-main">
-            <div className="stage-meta-pills">
-              <span className="stage-pill">Stage {current.step}</span>
-              <span className="stage-pill stage-pill-gold">{current.duration}</span>
-              <span className="stage-pill stage-pill-outline">Handled by: {current.owner}</span>
-            </div>
-
-            <h3>{current.title}</h3>
-            <p className="stage-description">{current.description}</p>
-
-            <ul className="stage-actions-list">
-              {current.actions.map((action) => (
-                <li key={action}>
-                  <CheckCircleIcon className="icon-sm stage-check" />
-                  <span>{action}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="stage-panel-side">
-            <div className="deliverable-box">
-              <span className="deliverable-label">STAGE OUTCOME</span>
-              <strong>{current.output}</strong>
-              <p>Verified by LegalTackleAdvisor desk before moving to the next milestone.</p>
-            </div>
-
-            <div className="stage-controls">
-              <div className="stage-step-dots" aria-hidden="true">
-                {WORKFLOW_STAGES.map((s, i) => (
-                  <span key={s.step} className={`dot-indicator ${i === activeIndex ? 'active' : ''}`} />
-                ))}
+        <div className="reveal-on-scroll">
+          <div className="workflow-stage-panel" key={current.step}>
+            <div className="stage-panel-main">
+              <div className="stage-meta-pills">
+                <span className="stage-pill">Stage {current.step}</span>
+                <span className="stage-pill stage-pill-gold">{current.duration}</span>
+                <span className="stage-pill stage-pill-outline">Handled by: {current.owner}</span>
               </div>
-              <a
-                href="#contact"
-                className="btn btn-primary"
-                onClick={(e) => onNavigate(e, 'contact')}
-              >
-                <span>Start Stage 01 Now</span>
-                <ArrowRightIcon className="icon-sm" />
-              </a>
+
+              <h3>{current.title}</h3>
+              <p className="stage-description">{current.description}</p>
+
+              <ul className="stage-actions-list">
+                {current.actions.map((action) => (
+                  <li key={action}>
+                    <CheckCircleIcon className="icon-sm stage-check" />
+                    <span>{action}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="stage-panel-side">
+              <div className="deliverable-box">
+                <span className="deliverable-label">STAGE OUTCOME</span>
+                <strong>{current.output}</strong>
+                <p>Verified by LegalTackleAdvisor desk before moving to the next milestone.</p>
+              </div>
+
+              <div className="stage-controls">
+                <div className="stage-step-dots" aria-hidden="true">
+                  {WORKFLOW_STAGES.map((s, i) => (
+                    <span key={s.step} className={`dot-indicator ${i === activeIndex ? 'active' : ''}`} />
+                  ))}
+                </div>
+                <a
+                  href="#contact"
+                  className="btn btn-primary"
+                  onClick={(e) => onNavigate(e, 'contact')}
+                >
+                  <span>Start Stage 01 Now</span>
+                  <ArrowRightIcon className="icon-sm" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
