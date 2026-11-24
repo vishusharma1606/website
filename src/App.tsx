@@ -174,11 +174,13 @@ function App() {
         <div className="shell footer-inner">
           <div className="footer-brand">
             <div className="footer-brand-row">
-              <img
-                src={`${import.meta.env.BASE_URL}logo.svg`}
-                alt="LegalTackleAdvisor crest"
-                className="footer-logo"
-              />
+              <span className="footer-logo-badge">
+                <img
+                  src={`${import.meta.env.BASE_URL}logo.png`}
+                  alt="LegalTackleAdvisor logo"
+                  className="footer-logo"
+                />
+              </span>
               <strong>LegalTackleAdvisor</strong>
             </div>
             <p>

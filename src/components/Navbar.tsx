@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           >
             <span className="brand-mark">
               <img
-                src={`${import.meta.env.BASE_URL}logo.svg`}
+                src={`${import.meta.env.BASE_URL}logo.png`}
                 alt="LegalTackleAdvisor logo"
                 className="brand-logo"
               />
