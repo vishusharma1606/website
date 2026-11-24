@@ -173,7 +173,14 @@ function App() {
       <footer className="site-footer">
         <div className="shell footer-inner">
           <div className="footer-brand">
-            <strong>LegalTackleAdvisor</strong>
+            <div className="footer-brand-row">
+              <img
+                src={`${import.meta.env.BASE_URL}logo.svg`}
+                alt="LegalTackleAdvisor crest"
+                className="footer-logo"
+              />
+              <strong>LegalTackleAdvisor</strong>
+            </div>
             <p>
               Private advisory firm helping individuals, startups, and businesses with ITR, GST,
               incorporation, audit, DSC, ROC, and legal compliance.
