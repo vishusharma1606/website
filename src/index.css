@@ -1988,6 +1988,280 @@ section[id] {
   transform: translateY(-3px);
 }
 
+/* Service Card Actions & Dedicated Service Pages */
+.service-card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.service-quick-btn {
+  border: 1px solid var(--border);
+  background: var(--ivory);
+  color: var(--text-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.28rem 0.6rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.service-quick-btn:hover {
+  border-color: var(--gold-500);
+  color: var(--navy-900);
+}
+
+.service-page-wrap {
+  animation: fadeSlideUp 0.35s ease;
+}
+
+.service-page-hero {
+  background: linear-gradient(180deg, #ffffff 0%, var(--ivory) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 0 4rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.crumb-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--navy-700);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.crumb-link:hover {
+  color: var(--gold-500);
+}
+
+.crumb-current {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.service-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.service-hero-grid h1 {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.service-hero-overview {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 0 0 1.75rem;
+  max-width: 60ch;
+}
+
+.service-who-card {
+  background: var(--navy-900);
+  color: #f8fafc;
+  border-radius: var(--radius);
+  padding: 1.65rem;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: var(--shadow-lg);
+}
+
+.who-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+}
+
+.who-icon {
+  color: var(--gold-400);
+}
+
+.who-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.93rem;
+  color: #e2e8f0;
+}
+
+.who-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.who-list .stage-check {
+  color: #34d399;
+  margin-top: 3px;
+}
+
+.service-process-section {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.service-details-section {
+  background: var(--ivory);
+}
+
+.service-details-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.service-specs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.spec-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.65rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.spec-card-docs {
+  background: #f5f7fb;
+}
+
+.spec-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 1rem;
+}
+
+.spec-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  color: var(--text-soft);
+}
+
+.spec-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.spec-list .stage-check {
+  margin-top: 3px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  color: var(--navy-900);
+  cursor: pointer;
+}
+
+.faq-toggle {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--gold-500);
+}
+
+.faq-answer {
+  margin: 0;
+  padding: 0 1.1rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.service-enquiry-sticky {
+  position: sticky;
+  top: 120px;
+}
+
+.other-services-section {
+  background: var(--ivory-alt);
+  border-top: 1px solid var(--border);
+}
+
+.other-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 0.9rem;
+}
+
+.other-service-pill {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+
+.other-service-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-500);
+  box-shadow: var(--shadow-sm);
+}
+
+.other-service-pill small {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--gold-500);
+  font-weight: 600;
+}
+
+.other-service-pill strong {
+  display: block;
+  font-size: 0.96rem;
+  color: var(--navy-900);
+}
+
 /* Scroll Reveal */
 .reveal-on-scroll {
   opacity: 0;
@@ -2008,8 +2282,14 @@ section[id] {
   .workflow-stage-panel,
   .finder-box,
   .about-layout,
-  .contact-layout {
+  .contact-layout,
+  .service-hero-grid,
+  .service-details-grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-enquiry-sticky {
+    position: static;
   }
 
   .workflow-nodes {

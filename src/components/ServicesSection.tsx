@@ -7,6 +7,7 @@ import {
 import { ArrowRightIcon, CheckCircleIcon, ClockIcon } from './Icons';
 
 interface ServicesSectionProps {
+  onOpenServicePage: (slug: string) => void;
   onSelectServiceForEnquiry: (serviceTitle: string) => void;
 }
 
@@ -18,6 +19,7 @@ const CATEGORIES: { key: ServiceCategory; label: string }[] = [
 ];
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
+  onOpenServicePage,
   onSelectServiceForEnquiry,
 }) => {
   const [activeCategory, setActiveCategory] = useState<ServiceCategory>('all');
@@ -36,7 +38,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <p className="eyebrow">Practice Areas</p>
             <h2>Comprehensive Tax, Registration &amp; Compliance Solutions</h2>
             <p className="section-intro">
-              Click any service to inspect required documents, typical turnaround times, and exact deliverables.
+              Open any service for its dedicated page with full step-by-step workflow, document checklist, FAQs, and direct enquiry.
             </p>
           </div>
 
@@ -59,7 +61,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <article
               key={service.id}
               className="service-card"
-              onClick={() => setSelectedService(service)}
+              onClick={() => onOpenServicePage(service.slug)}
             >
               <div className="service-card-top">
                 <span className="service-cat-tag">{service.categoryLabel}</span>
@@ -74,17 +76,30 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <ClockIcon className="icon-xs" />
                   <span>{service.turnaround}</span>
                 </span>
-                <button
-                  type="button"
-                  className="service-inspect-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedService(service);
-                  }}
-                >
-                  <span>Checklist</span>
-                  <ArrowRightIcon className="icon-xs" />
-                </button>
+                <div className="service-card-actions">
+                  <button
+                    type="button"
+                    className="service-quick-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedService(service);
+                    }}
+                  >
+                    Quick Peek
+                  </button>
+                  <a
+                    href={`#/services/${service.slug}`}
+                    className="service-inspect-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onOpenServicePage(service.slug);
+                    }}
+                  >
+                    <span>Full Page</span>
+                    <ArrowRightIcon className="icon-xs" />
+                  </a>
+                </div>
               </div>
             </article>
           ))}
@@ -148,20 +163,24 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  const title = selectedService.title;
+                  const slug = selectedService.slug;
                   setSelectedService(null);
-                  onSelectServiceForEnquiry(title);
+                  onOpenServicePage(slug);
                 }}
               >
-                <span>Enquire for {selectedService.title}</span>
+                <span>Open Full {selectedService.title} Page</span>
                 <ArrowRightIcon className="icon-sm" />
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => setSelectedService(null)}
+                onClick={() => {
+                  const title = selectedService.title;
+                  setSelectedService(null);
+                  onSelectServiceForEnquiry(title);
+                }}
               >
-                Close
+                Enquire Now
               </button>
             </div>
           </div>

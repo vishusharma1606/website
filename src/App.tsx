@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from 'react';
+import { useCallback, useEffect, useState, type MouseEvent } from 'react';
 import About from './About';
 import Contact from './Contact';
 import Testimonials from './Testimonials';
@@ -8,24 +8,85 @@ import { PhoneIcon } from './components/Icons';
 import { MarqueeStrip } from './components/MarqueeStrip';
 import { MovingWorkflow } from './components/MovingWorkflow';
 import { Navbar } from './components/Navbar';
+import { ServiceDetailPage } from './components/ServiceDetailPage';
 import { ServicesSection } from './components/ServicesSection';
+import { SERVICES } from './data/advisoryData';
+
+function getServiceSlugFromHash(hash: string): string | null {
+  const match = hash.match(/^#\/services\/([^/?#]+)/);
+  return match ? match[1] : null;
+}
 
 function App() {
   const [activeSection, setActiveSection] = useState('top');
   const [selectedService, setSelectedService] = useState('');
   const [prefillNote, setPrefillNote] = useState('');
+  const [serviceSlug, setServiceSlug] = useState<string | null>(() =>
+    getServiceSlugFromHash(window.location.hash)
+  );
+  const [pendingScrollId, setPendingScrollId] = useState<string | null>(null);
 
-  const scrollToSection = (targetId: string) => {
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const activeService = serviceSlug
+    ? SERVICES.find((s) => s.slug === serviceSlug) ?? null
+    : null;
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const slug = getServiceSlugFromHash(window.location.hash);
+      setServiceSlug(slug);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (activeService) {
+      document.title = `${activeService.title} — LegalTackleAdvisor`;
+    } else {
+      document.title = 'LegalTackleAdvisor — Tax, Audit & Legal Advisory';
     }
-    window.history.pushState(null, '', `#${targetId}`);
-  };
+  }, [activeService]);
+
+  const scrollToSection = useCallback(
+    (targetId: string) => {
+      if (activeService) {
+        setServiceSlug(null);
+        setPendingScrollId(targetId);
+        window.history.pushState(null, '', `#${targetId}`);
+        return;
+      }
+
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      window.history.pushState(null, '', `#${targetId}`);
+    },
+    [activeService]
+  );
+
+  useEffect(() => {
+    if (!activeService && pendingScrollId) {
+      const id = pendingScrollId;
+      setPendingScrollId(null);
+      window.requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  }, [activeService, pendingScrollId]);
 
   const handleNavigate = (event: MouseEvent<HTMLAnchorElement>, targetId: string) => {
     event.preventDefault();
     scrollToSection(targetId);
+  };
+
+  const handleOpenServicePage = (slug: string) => {
+    window.location.hash = `#/services/${slug}`;
+    setServiceSlug(slug);
   };
 
   const handleSelectServiceForEnquiry = (serviceTitle: string, note = '') => {
@@ -35,6 +96,8 @@ function App() {
   };
 
   useEffect(() => {
+    if (activeService) return;
+
     const elements = document.querySelectorAll('.reveal-on-scroll');
     if (elements.length === 0) return;
 
@@ -52,9 +115,14 @@ function App() {
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [activeService]);
 
   useEffect(() => {
+    if (activeService) {
+      setActiveSection('services');
+      return;
+    }
+
     const sectionIds = ['top', 'workflow', 'services', 'finder', 'about', 'contact'];
     const observer = new IntersectionObserver(
       (entries) => {
@@ -73,21 +141,34 @@ function App() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [activeService]);
 
   return (
     <div className="app-root" id="top">
       <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
 
       <main>
-        <Hero onNavigate={handleNavigate} />
-        <MarqueeStrip />
-        <MovingWorkflow onNavigate={handleNavigate} />
-        <ServicesSection onSelectServiceForEnquiry={handleSelectServiceForEnquiry} />
-        <ComplianceFinder onSelectServiceForEnquiry={handleSelectServiceForEnquiry} />
-        <About />
-        <Testimonials />
-        <Contact selectedService={selectedService} prefillNote={prefillNote} />
+        {activeService ? (
+          <ServiceDetailPage
+            service={activeService}
+            onNavigateHome={(sectionId = 'top') => scrollToSection(sectionId)}
+            onNavigateService={handleOpenServicePage}
+          />
+        ) : (
+          <>
+            <Hero onNavigate={handleNavigate} />
+            <MarqueeStrip />
+            <MovingWorkflow onNavigate={handleNavigate} />
+            <ServicesSection
+              onOpenServicePage={handleOpenServicePage}
+              onSelectServiceForEnquiry={handleSelectServiceForEnquiry}
+            />
+            <ComplianceFinder onSelectServiceForEnquiry={handleSelectServiceForEnquiry} />
+            <About />
+            <Testimonials />
+            <Contact selectedService={selectedService} prefillNote={prefillNote} />
+          </>
+        )}
       </main>
 
       <footer className="site-footer">
